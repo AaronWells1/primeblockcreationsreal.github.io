@@ -111,6 +111,86 @@
             <p>Powered by creativity & innovation</p>
         </div>
     </footer>
+    <script>
+                // Animated background
+        const canvas = document.getElementById('bgCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        class Cell {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.size = Math.random() * 40 + 20;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = (Math.random() - 0.5) * 0.5;
+                this.opacity = Math.random() * 0.5;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            }
+
+            draw() {
+                ctx.fillStyle = `rgba(100, 150, 250, ${this.opacity})`;
+                ctx.fillRect(this.x, this.y, this.size, this.size);
+            }
+        }
+
+        const cells = [];
+        for (let i = 0; i < 15; i++) {
+            cells.push(new Cell(Math.random() * canvas.width, Math.random() * canvas.height));
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            cells.forEach(cell => {
+                cell.update();
+                cell.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        // Particle effect
+        const particlesContainer = document.getElementById('particles');
+        setInterval(() => {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 2 + 's';
+            particle.style.animationDuration = (Math.random() * 5 + 6) + 's';
+            particlesContainer.appendChild(particle);
+
+            setTimeout(() => particle.remove(), 8000);
+        }, 500);
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                // Only prevent default and smooth scroll if it's a valid anchor
+                if (href && href !== '#' && document.querySelector(href)) {
+                    e.preventDefault();
+                    document.querySelector(href).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Window resize handler
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
 
 </body>
 </html>
