@@ -258,7 +258,7 @@
 
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
             gap: 3rem;
             margin-top: 4rem;
         }
@@ -266,7 +266,7 @@
         @media (max-width: 768px) {
             .projects-grid {
                 grid-template-columns: 1fr;
-                gap: 2rem;
+                gap: 3rem;
                 padding: 0;
             }
         }
@@ -282,10 +282,11 @@
             position: relative;
             border-radius: 20px;
             overflow: hidden;
-            aspect-ratio: 16/10;
+            aspect-ratio: 16/9;
             cursor: pointer;
             transition: transform 0.5s ease;
             box-shadow: var(--shadow);
+            min-height: 280px;
         }
 
         .project-card:hover {
